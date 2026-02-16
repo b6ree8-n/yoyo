@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jenny ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(135deg,#ff5f9e,#ffc3a0);
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    color:white;
+    transition:1s;
+}
+
+.container{
+    animation:fadeIn 2s ease forwards;
+}
+
+@keyframes fadeIn{
+    from{opacity:0;transform:translateY(30px);}
+    to{opacity:1;transform:translateY(0);}
+}
+
+.photo{
+    width:260px;
+    border-radius:25px;
+    border:5px solid white;
+    box-shadow:0 0 30px rgba(255,255,255,0.6);
+    animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+}
+
+h1{
+    margin-top:20px;
+    font-weight:800;
+    font-size:28px;
+}
+
+.buttons{
+    margin-top:30px;
+    position:relative;
+    height:150px;
+}
+
+button{
+    padding:12px 30px;
+    font-size:18px;
+    border:none;
+    border-radius:40px;
+    cursor:pointer;
+    position:absolute;
+    transition:0.3s;
+}
+
+#yesBtn{
+    background:#ff2e63;
+    color:white;
+    left:35%;
+    box-shadow:0 0 15px #ff2e63;
+}
+
+#yesBtn:hover{
+    transform:scale(1.15);
+}
+
+#noBtn{
+    background:#222;
+    color:white;
+    left:55%;
+}
+
+.message{
+    margin-top:25px;
+    display:none;
+    animation:fadeIn 1.5s forwards;
+}
+
+.message h2{
+    font-size:30px;
+    margin-bottom:10px;
+}
+
+.message p{
+    max-width:500px;
+    margin:auto;
+    font-size:17px;
+    line-height:1.6;
+}
+
+.confetti{
+    position:fixed;
+    width:10px;
+    height:10px;
+    background:yellow;
+    top:-10px;
+    animation:fall 3s linear infinite;
+}
+
+@keyframes fall{
+    to{transform:translateY(100vh) rotate(720deg);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <img src="photo.jpg" class="photo">
+
+    <h1>Jenny, will you be my Valentine? 💖</h1>
+
+    <div class="buttons">
+        <button id="yesBtn">Yes ❤️</button>
+        <button id="noBtn">No 😏</button>
+    </div>
+
+    <div class="message" id="loveMessage">
+        <h2>YAYYY! Love you pookie 💕</h2>
+        <p>
+            You are my favorite place, my happiest thought, and my sweetest dream.  
+            Every second with you feels magical.  
+            I can't wait to give you your gift — it means the world to me, just like you do.  
+            I promise to always make you smile, protect your heart,  
+            and choose you every single day. ❤️
+        </p>
+    </div>
+
+</div>
+
+<audio id="bgMusic" src="https://www.bensound.com/bensound-music/bensound-romantic.mp3"></audio>
+<audio id="laughSound" src="https://www.soundjay.com/human/laugh-1.mp3"></audio>
+
+<script>
+const noBtn=document.getElementById("noBtn");
+const yesBtn=document.getElementById("yesBtn");
+const laugh=document.getElementById("laughSound");
+const music=document.getElementById("bgMusic");
+const message=document.getElementById("loveMessage");
+
+document.body.addEventListener("click",()=>{
+    music.play().catch(()=>{});
+},{once:true});
+
+noBtn.addEventListener("mouseover",()=>{
+    const x=Math.random()*(window.innerWidth-120);
+    const y=Math.random()*(window.innerHeight-120);
+    noBtn.style.left=x+"px";
+    noBtn.style.top=y+"px";
+    laugh.currentTime=0;
+    laugh.play();
+});
+
+yesBtn.addEventListener("click",()=>{
+    document.body.style.background="linear-gradient(135deg,#ff0844,#ffb199)";
+    message.style.display="block";
+    startConfetti();
+});
+
+function startConfetti(){
+    setInterval(()=>{
+        const conf=document.createElement("div");
+        conf.classList.add("confetti");
+        conf.style.left=Math.random()*100+"vw";
+        conf.style.background=["#ff0","#ff4d6d","#fff","#00f5d4"][Math.floor(Math.random()*4)];
+        document.body.appendChild(conf);
+        setTimeout(()=>conf.remove(),3000);
+    },150);
+}
+</script>
+
+</body>
+</html>
